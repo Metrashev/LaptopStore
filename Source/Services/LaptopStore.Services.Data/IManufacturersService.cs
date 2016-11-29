@@ -4,10 +4,10 @@
 
     using LaptopStore.Data.Models;
 
-    public interface ICategoriesService
+    public interface IManufacturersService
     {
-        IQueryable<JokeCategory> GetAll();
+        IQueryable<Manufacturer> GetAll();
 
-        JokeCategory EnsureCategory(string name);
+        Manufacturer EnsureCategory(string name);
     }
 }

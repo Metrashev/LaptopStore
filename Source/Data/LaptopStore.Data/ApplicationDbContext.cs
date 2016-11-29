@@ -17,9 +17,9 @@
         {
         }
 
-        public IDbSet<Joke> Jokes { get; set; }
+        public IDbSet<Laptop> Laptops { get; set; }
 
-        public IDbSet<JokeCategory> JokesCategories { get; set; }
+        public IDbSet<Manufacturer> Manufacturers { get; set; }
 
         public static ApplicationDbContext Create()
         {

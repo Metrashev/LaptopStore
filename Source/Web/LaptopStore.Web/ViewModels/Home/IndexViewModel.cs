@@ -4,8 +4,8 @@
 
     public class IndexViewModel
     {
-        public IEnumerable<JokeViewModel> Jokes { get; set; }
+        public IEnumerable<LaptopViewModel> Laptops { get; set; }
 
-        public IEnumerable<JokeCategoryViewModel> Categories { get; set; }
+        public IEnumerable<ManufacturerViewModel> Manufacturers { get; set; }
     }
 }

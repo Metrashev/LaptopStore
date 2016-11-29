@@ -2,12 +2,12 @@
 {
     using LaptopStore.Data.Common.Models;
 
-    public class Joke : BaseModel<int>
+    public class Laptop : BaseModel<int>
     {
         public string Content { get; set; }
 
-        public int CategoryId { get; set; }
+        public int ManufacturerId { get; set; }
 
-        public virtual JokeCategory Category { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 }

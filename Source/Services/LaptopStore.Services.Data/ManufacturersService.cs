@@ -5,16 +5,16 @@
     using LaptopStore.Data.Common;
     using LaptopStore.Data.Models;
 
-    public class CategoriesService : ICategoriesService
+    public class ManufacturersService : IManufacturersService
     {
-        private readonly IDbRepository<JokeCategory> categories;
+        private readonly IDbRepository<Manufacturer> categories;
 
-        public CategoriesService(IDbRepository<JokeCategory> categories)
+        public ManufacturersService(IDbRepository<Manufacturer> categories)
         {
             this.categories = categories;
         }
 
-        public JokeCategory EnsureCategory(string name)
+        public Manufacturer EnsureCategory(string name)
         {
             var category = this.categories.All().FirstOrDefault(x => x.Name == name);
             if (category != null)
@@ -22,13 +22,13 @@
                 return category;
             }
 
-            category = new JokeCategory { Name = name };
+            category = new Manufacturer { Name = name };
             this.categories.Add(category);
             this.categories.Save();
             return category;
         }
 
-        public IQueryable<JokeCategory> GetAll()
+        public IQueryable<Manufacturer> GetAll()
         {
             return this.categories.All().OrderBy(x => x.Name);
         }

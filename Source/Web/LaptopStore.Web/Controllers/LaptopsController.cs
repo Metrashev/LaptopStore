@@ -6,20 +6,20 @@
     using LaptopStore.Web.Infrastructure.Mapping;
     using LaptopStore.Web.ViewModels.Home;
 
-    public class JokesController : BaseController
+    public class LaptopsController : BaseController
     {
-        private readonly IJokesService jokes;
+        private readonly ILaptopsService laptops;
 
-        public JokesController(
-            IJokesService jokes)
+        public LaptopsController(
+            ILaptopsService laptops)
         {
-            this.jokes = jokes;
+            this.laptops = laptops;
         }
 
         public ActionResult ById(string id)
         {
-            var joke = this.jokes.GetById(id);
-            var viewModel = this.Mapper.Map<JokeViewModel>(joke);
+            var laptop = this.laptops.GetById(id);
+            var viewModel = this.Mapper.Map<LaptopViewModel>(laptop);
             return this.View(viewModel);
         }
     }

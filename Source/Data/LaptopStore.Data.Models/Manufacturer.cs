@@ -4,15 +4,15 @@
 
     using LaptopStore.Data.Common.Models;
 
-    public class JokeCategory : BaseModel<int>
+    public class Manufacturer : BaseModel<int>
     {
-        public JokeCategory()
+        public Manufacturer()
         {
-            this.Jokes = new HashSet<Joke>();
+            this.Laptops = new HashSet<Laptop>();
         }
 
         public string Name { get; set; }
 
-        public virtual ICollection<Joke> Jokes { get; set; }
+        public virtual ICollection<Laptop> Laptops { get; set; }
     }
 }

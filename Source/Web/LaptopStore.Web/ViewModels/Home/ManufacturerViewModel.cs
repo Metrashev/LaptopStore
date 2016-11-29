@@ -3,7 +3,7 @@
     using LaptopStore.Data.Models;
     using LaptopStore.Web.Infrastructure.Mapping;
 
-    public class JokeCategoryViewModel : IMapFrom<JokeCategory>
+    public class ManufacturerViewModel : IMapFrom<Manufacturer>
     {
         public int Id { get; set; }
 

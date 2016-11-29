@@ -20,13 +20,13 @@
     //        var autoMapperConfig = new AutoMapperConfig();
     //        autoMapperConfig.Execute(typeof(JokesController).Assembly);
     //        const string JokeContent = "SomeContent";
-    //        var jokesServiceMock = new Mock<IJokesService>();
-    //        jokesServiceMock.Setup(x => x.GetById(It.IsAny<string>()))
+    //        var LaptopsServiceMock = new Mock<ILaptopsService>();
+    //        LaptopsServiceMock.Setup(x => x.GetById(It.IsAny<string>()))
     //            .Returns(new Joke { Content = JokeContent, Category = new JokeCategory { Name = "asda" } });
-    //        var controller = new JokesController(jokesServiceMock.Object);
+    //        var controller = new JokesController(LaptopsServiceMock.Object);
     //        controller.WithCallTo(x => x.ById("asdasasd"))
     //            .ShouldRenderView("ById")
-    //            .WithModel<JokeViewModel>(
+    //            .WithModel<LaptopViewModel>(
     //                viewModel =>
     //                    {
     //                        Assert.AreEqual(JokeContent, viewModel.Content);
