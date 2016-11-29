@@ -6,5 +6,6 @@
     [Authorize(Roles = "Administrator")]
     public class AdministrationController : BaseController
     {
+
     }
 }

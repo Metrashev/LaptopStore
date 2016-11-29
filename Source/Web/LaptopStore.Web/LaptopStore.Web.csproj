@@ -199,6 +199,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\LaptopsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,6 +254,16 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Administration\Views\web.config" />
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Laptops\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Laptops\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Laptops\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Laptops\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Laptops\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Manufacturers\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Manufacturers\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Manufacturers\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Manufacturers\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Manufacturers\Index.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -298,7 +310,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Administration\ViewModels\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
