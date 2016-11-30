@@ -1,4 +1,5 @@
-﻿namespace LaptopStore.Services.Data
+﻿
+namespace LaptopStore.Services.Data
 {
     using System.Linq;
 
@@ -6,8 +7,16 @@
 
     public interface ILaptopsService
     {
-        IQueryable<Laptop> GetRandomLaptops(int count);
+        IQueryable<Laptop> GetAll();
 
-        Laptop GetById(string id);
+        Laptop Find(object id);
+
+        void Update(Laptop entity);
+
+        void Add(Laptop entity);
+
+        void Delete(object id);
+
+        void SaveChanges();
     }
 }

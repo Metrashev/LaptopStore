@@ -16,9 +16,9 @@
             this.laptops = laptops;
         }
 
-        public ActionResult ById(string id)
+        public ActionResult Index()
         {
-            var laptop = this.laptops.GetById(id);
+            var laptop = this.laptops.GetAll();
             var viewModel = this.Mapper.Map<LaptopViewModel>(laptop);
             return this.View(viewModel);
         }

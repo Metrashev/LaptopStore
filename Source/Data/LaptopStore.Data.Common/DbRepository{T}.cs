@@ -17,48 +17,61 @@
                 throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
             }
 
-            this.Context = context;
-            this.DbSet = this.Context.Set<T>();
+            this.context = context;
+            this.set = this.context.Set<T>();
         }
 
-        private IDbSet<T> DbSet { get; }
-
-        private DbContext Context { get; }
+        private DbContext context;
+        private IDbSet<T> set;
 
         public IQueryable<T> All()
         {
-            return this.DbSet.Where(x => !x.IsDeleted);
-        }
-
-        public IQueryable<T> AllWithDeleted()
-        {
-            return this.DbSet;
-        }
-
-        public T GetById(int id)
-        {
-            return this.All().FirstOrDefault(x => x.Id == id);
+            return this.set;
         }
 
         public void Add(T entity)
         {
-            this.DbSet.Add(entity);
+            ChangeState(entity, EntityState.Added);
         }
 
-        public void Delete(T entity)
+        public T Find(object id)
         {
-            entity.IsDeleted = true;
-            entity.DeletedOn = DateTime.UtcNow;
+            return this.set.Find(id);
         }
 
-        public void HardDelete(T entity)
+        public void Update(T entity)
         {
-            this.DbSet.Remove(entity);
+            ChangeState(entity, EntityState.Modified);
         }
 
-        public void Save()
+        public T Delete(T entity)
         {
-            this.Context.SaveChanges();
+            ChangeState(entity, EntityState.Deleted);
+            return entity;
+        }
+
+        public T Delete(object id)
+        {
+            T entity = this.Find(id);
+            this.Delete(entity);
+            return entity;
+        }
+
+        public int SaveChanges()
+        {
+            return this.context.SaveChanges();
+        }
+
+        private void ChangeState(T entity, EntityState state)
+        {
+            var entry = this.context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.set.Attach(entity);
+            }
+
+            entry.State = state;
+
         }
     }
 }

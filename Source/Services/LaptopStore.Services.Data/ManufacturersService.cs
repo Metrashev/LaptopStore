@@ -7,30 +7,30 @@
 
     public class ManufacturersService : IManufacturersService
     {
-        private readonly IDbRepository<Manufacturer> categories;
+        private readonly IDbRepository<Manufacturer> manufacturers;
 
-        public ManufacturersService(IDbRepository<Manufacturer> categories)
+        public ManufacturersService(IDbRepository<Manufacturer> manufacturers)
         {
-            this.categories = categories;
+            this.manufacturers = manufacturers;
         }
 
         public Manufacturer EnsureCategory(string name)
         {
-            var category = this.categories.All().FirstOrDefault(x => x.Name == name);
-            if (category != null)
+            var manufacturer = this.manufacturers.All().FirstOrDefault(x => x.Name == name);
+            if (manufacturer != null)
             {
-                return category;
+                return manufacturer;
             }
 
-            category = new Manufacturer { Name = name };
-            this.categories.Add(category);
-            this.categories.Save();
-            return category;
+            manufacturer = new Manufacturer { Name = name };
+            this.manufacturers.Add(manufacturer);
+            this.manufacturers.SaveChanges();
+            return manufacturer;
         }
 
         public IQueryable<Manufacturer> GetAll()
         {
-            return this.categories.All().OrderBy(x => x.Name);
+            return this.manufacturers.All().OrderBy(x => x.Name);
         }
     }
 }

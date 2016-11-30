@@ -4,26 +4,20 @@
 
     using LaptopStore.Data.Common.Models;
 
-    public interface IDbRepository<T> : IDbRepository<T, int>
-        where T : BaseModel<int>
-    {
-    }
-
-    public interface IDbRepository<T, in TKey>
-        where T : BaseModel<TKey>
+    public interface IDbRepository<T> where T : class
     {
         IQueryable<T> All();
 
-        IQueryable<T> AllWithDeleted();
-
-        T GetById(TKey id);
-
         void Add(T entity);
 
-        void Delete(T entity);
+        T Find(object id);
 
-        void HardDelete(T entity);
+        void Update(T entity);
 
-        void Save();
+        T Delete(T entity);
+
+        T Delete(object id);
+
+        int SaveChanges();
     }
 }

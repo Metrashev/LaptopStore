@@ -8,18 +8,60 @@ using System.Web;
 using System.Web.Mvc;
 using LaptopStore.Data;
 using LaptopStore.Data.Models;
+using LaptopStore.Web.Controllers;
+using LaptopStore.Web.Areas.Administration.ViewModels;
+using LaptopStore.Services.Data;
 
 namespace LaptopStore.Web.Areas.Administration.Controllers
 {
-    public class LaptopsController : Controller
+    public class LaptopsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+
+        private ILaptopsService laptopsService;
+
+        private IManufacturersService manufacturersService;
+
+        public LaptopsController(
+            ILaptopsService laptopService,
+            IManufacturersService manufacturersService)
+        {
+            this.laptopsService = laptopService;
+            this.manufacturersService = manufacturersService;
+        }
 
         // GET: Administration/Laptops
         public ActionResult Index()
         {
-            var laptops = db.Laptops.Include(l => l.Manufacturer);
-            return View(laptops.ToList());
+            var laptops = Mapper.Map<List<Laptop>, List<LaptopViewModel>>(laptopsService.GetAll().ToList());
+            return View(laptops);
+        }
+
+        //private ApplicationDbContext db = new ApplicationDbContext();
+
+        // GET: Administration/Laptops/Create
+        public ActionResult Create()
+        {
+            ViewBag.ManufacturerId = new SelectList(this.manufacturersService.GetAll(), "Id", "Name");
+            return View();
+        }
+
+        // POST: Administration/Laptops/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Create(LaptopViewModel laptop)
+        {
+            if (ModelState.IsValid)
+            {
+                var dbLaptop = Mapper.Map<Laptop>(laptop);
+                this.laptopsService.Add(dbLaptop);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ManufacturersList = new SelectList(this.manufacturersService.GetAll(), "Id", "Name", laptop.ManufacturersList);
+            return View(laptop);
         }
 
         // GET: Administration/Laptops/Details/5
@@ -29,53 +71,32 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Laptop laptop = db.Laptops.Find(id);
+            Laptop laptop = this.laptopsService.Find(id);
             if (laptop == null)
             {
                 return HttpNotFound();
             }
-            return View(laptop);
-        }
-
-        // GET: Administration/Laptops/Create
-        public ActionResult Create()
-        {
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
-            return View();
-        }
-
-        // POST: Administration/Laptops/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Model,ManufacturerId,MonitorSize,HardDiskSize,RamMemorySize,ImageUrl,Price,Weight,Description,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] Laptop laptop)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Laptops.Add(laptop);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", laptop.ManufacturerId);
-            return View(laptop);
+            return this.View(laptop);
         }
 
         // GET: Administration/Laptops/Edit/5
+        [ValidateInput(false)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Laptop laptop = db.Laptops.Find(id);
+            Laptop laptop = laptopsService.Find(id);
             if (laptop == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", laptop.ManufacturerId);
-            return View(laptop);
+
+            LaptopViewModel laptopViewModel = Mapper.Map<LaptopViewModel>(laptop);
+            laptopViewModel.ManufacturersList = new SelectList(manufacturersService.GetAll(), "Id", "Name");
+
+            return this.View(laptopViewModel);
         }
 
         // POST: Administration/Laptops/Edit/5
@@ -83,16 +104,16 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Model,ManufacturerId,MonitorSize,HardDiskSize,RamMemorySize,ImageUrl,Price,Weight,Description,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] Laptop laptop)
+        public ActionResult Edit(LaptopViewModel laptop)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(laptop).State = EntityState.Modified;
-                db.SaveChanges();
+                var dbLaptop = Mapper.Map<Laptop>(laptop);
+                this.laptopsService.Update(dbLaptop);
                 return RedirectToAction("Index");
             }
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", laptop.ManufacturerId);
-            return View(laptop);
+            laptop.ManufacturersList = new SelectList(this.manufacturersService.GetAll(), "Id", "Name", laptop.ManufacturersList);
+            return this.View(laptop);
         }
 
         // GET: Administration/Laptops/Delete/5
@@ -102,12 +123,12 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Laptop laptop = db.Laptops.Find(id);
+            Laptop laptop = this.laptopsService.Find(id);
             if (laptop == null)
             {
                 return HttpNotFound();
             }
-            return View(laptop);
+            return this.View(laptop);
         }
 
         // POST: Administration/Laptops/Delete/5
@@ -115,19 +136,17 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Laptop laptop = db.Laptops.Find(id);
-            db.Laptops.Remove(laptop);
-            db.SaveChanges();
+            this.laptopsService.Delete(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

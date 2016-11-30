@@ -18,16 +18,37 @@
             this.identifierProvider = identifierProvider;
         }
 
-        public Laptop GetById(string id)
+        public IQueryable<Laptop> GetAll()
         {
-            var intId = this.identifierProvider.DecodeId(id);
-            var laptop = this.laptops.GetById(intId);
-            return laptop;
+            return this.laptops.All();
         }
 
-        public IQueryable<Laptop> GetRandomLaptops(int count)
+        public Laptop Find(object id)
         {
-            return this.laptops.All().OrderBy(x => Guid.NewGuid()).Take(count);
+            return this.laptops.Find(id);
+        }
+
+        public void Update(Laptop entity)
+        {
+            this.laptops.Update(entity);
+            this.laptops.SaveChanges();
+        }
+
+        public void Add(Laptop entity)
+        {
+            this.laptops.Add(entity);
+            this.laptops.SaveChanges();
+        }
+
+        public void Delete(object id)
+        {
+            this.laptops.Delete(id);
+            this.laptops.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
+            this.laptops.SaveChanges();
         }
     }
 }
