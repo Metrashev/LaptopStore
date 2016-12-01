@@ -1,11 +1,16 @@
-﻿@model LaptopStore.Web.ViewModels.Home.LaptopViewModel
-@{
-    ViewBag.Title = "ById";
-}
+﻿@*@model IEnumerable<LaptopViewModel>
 
-<div>
-    @Model.Content
-</div>
-<div>
-    Manufacturer: @Model.Manufacturer
-</div>
+@foreach (var item in Model)
+{
+    <div class="panel-group">
+        <div class="panel panel-default">
+            Manufacturer: <div>@item.Manufacturer</div> <br />
+        </div>
+        <div class="panel panel-default">
+            MonitorSize: <div>@item.MonitorSize</div>    <br />
+        </div>
+        <div class="panel panel-default">
+            HardDiskSize: <div>@item.HardDiskSize</div>    <br />
+        </div>
+    </div>
+}*@

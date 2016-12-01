@@ -5,22 +5,38 @@
     using LaptopStore.Services.Data;
     using LaptopStore.Web.Infrastructure.Mapping;
     using LaptopStore.Web.ViewModels.Home;
+    using Services.Web;
+    using System.Collections.Generic;
+    using Data.Models;
+    using System.Linq;
 
     public class LaptopsController : BaseController
     {
-        private readonly ILaptopsService laptops;
+        private readonly ILaptopsService laptopsService;
+
+        private readonly ICacheService cacheService;
 
         public LaptopsController(
-            ILaptopsService laptops)
+            ILaptopsService laptopsService,
+            ICacheService cacheService)
         {
-            this.laptops = laptops;
+            this.laptopsService = laptopsService;
+            this.cacheService = cacheService;
         }
 
         public ActionResult Index()
         {
-            var laptop = this.laptops.GetAll();
-            var viewModel = this.Mapper.Map<LaptopViewModel>(laptop);
-            return this.View(viewModel);
+            //var dbLaptops = this.cacheService.Get<ICollection<Laptop>>("allLaptops", () =>
+            //{
+            //    return laptopsService.GetAll();
+            //}, 60);
+            var dbLaptops = laptopsService.GetAll().ToList();
+            var laptops = Mapper.Map<ICollection<Laptop>,
+                ICollection<LaptopViewModel>>(dbLaptops);
+
+            //var laptop = this.laptops.GetAll();
+            //var viewModel = this.Mapper.Map<LaptopViewModel>(laptop);
+            return this.View(laptops);
         }
     }
 }

@@ -9,6 +9,8 @@
     {
         public int Id { get; set; }
 
+        public string Model { get; set; }
+
         public string Manufacturer { get; set; }
 
         public double MonitorSize { get; set; }
@@ -24,9 +26,6 @@
         public double? Weight { get; set; }
 
         public string Description { get; set; }
-        //public string Content { get; set; }
-
-
 
         //public string Url
         //{

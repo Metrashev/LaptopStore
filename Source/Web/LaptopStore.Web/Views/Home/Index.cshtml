@@ -1,24 +1,23 @@
-﻿@model LaptopStore.Web.ViewModels.Home.IndexViewModel
-@{
-    ViewBag.Title = "Home Page";
-}
-<h1>Index</h1>
-@*<div class="row">
-    @foreach (var laptop in Model.Laptops)
+﻿@model IEnumerable<LaptopViewModel>
+
+<div class="row">
+    
+    @foreach (var item in Model)
     {
-        <div class="col-md-4">
-            <a href="@laptop.Url">
-                @Html.Raw(laptop.Content.Replace("\n", "<br />"))
-            </a>
-            <div>@laptop.Manufacturer</div>
+        <div class="col-lg-3">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <img src="@item.ImageUrl" alt="@item.Manufacturer @item.Model" />
+                    <div class="text-center">@item.Manufacturer @item.Model</div>
+                        <div class="text-center">@item.MonitorSize"</div>
+                        <div class="text-center">@item.HardDiskSize GB</div>
+                        <div class="text-center">@item.RamMemorySize RAM</div>
+                        <div class="text-center">@item.Weight kg</div> <br/>
+                        <div class="text-center description">@item.Description</div>
+                        <div class="text-center"><a href="Home/Details/@item.Id" class="text-center">More Info</a></div><br />
+                        <div class="text-center padding-5px"><a href="Home/Details/@item.Id" class="text-center btn btn-info">@item.Price $</a></div>
+                </div>
+            </div>
         </div>
     }
 </div>
-<div class="row">
-    @foreach (var manufacturer in Model.Manufacturers)
-    {
-        <div class="col-md-2">
-            @manufacturer.Name
-        </div>
-    }
-</div>*@
