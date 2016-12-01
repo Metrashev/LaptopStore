@@ -6,10 +6,11 @@
     using Infrastructure.Mapping;
 
     using Services.Data;
-
+    using PagedList;
     using ViewModels.Home;
     using System.Collections.Generic;
     using Data.Models;
+    using System;
 
     public class HomeController : BaseController
     {
@@ -25,13 +26,30 @@
         }
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var dbLaptops = laptopsService.GetAll().ToList();
-            var laptops = Mapper.Map<ICollection<Laptop>,
-                ICollection<LaptopViewModel>>(dbLaptops);
+            //var dblaptops =
+            //    this.Cache.Get(
+            //        "LaptopsCaching",
+            //        () => this.laptopsService
+            //        .GetAll().ToList
+            //        60).ToList();
 
-            return this.View(laptops);
+            var dblaptops = laptopsService.GetAll().OrderBy(x => x.Id);
+
+            var laptops = Mapper.Map<ICollection<Laptop>,
+                ICollection<LaptopViewModel>>(dblaptops.ToList());
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return this.View(laptops.ToPagedList(pageNumber, pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            var laptop = Mapper.Map<LaptopViewModel>(this.laptopsService.Find(id));
+            return View(laptop);
         }
     }
 }

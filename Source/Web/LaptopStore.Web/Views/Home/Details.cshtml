@@ -1,0 +1,37 @@
+﻿@model LaptopViewModel
+
+@if (Model != null)
+{
+    <h2>@Model.Manufacturer @Model.Model</h2>
+    <img src="@Model.ImageUrl" alt="@Model.Manufacturer @Model.Model" />
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Monitor Size</th>
+                <td>@Model.MonitorSize"</td>
+            </tr>
+            <tr>
+                <th>Hard Disk Size</th>
+                <td>@Model.HardDiskSize GB</td>
+            </tr>
+            <tr>
+                <th>RamMemorySize</th>
+                <td>@Model.RamMemorySize GB</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>@Model.Weight kg.</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td><p class="text-bold">@Model.Price $</p></td>
+            </tr>
+        </tbody>
+    </table>
+
+}
+    

@@ -24,19 +24,19 @@
             this.cacheService = cacheService;
         }
 
-        public ActionResult Index()
-        {
-            //var dbLaptops = this.cacheService.Get<ICollection<Laptop>>("allLaptops", () =>
-            //{
-            //    return laptopsService.GetAll();
-            //}, 60);
-            var dbLaptops = laptopsService.GetAll().ToList();
-            var laptops = Mapper.Map<ICollection<Laptop>,
-                ICollection<LaptopViewModel>>(dbLaptops);
+        //public ActionResult Index()
+        //{
+        //    //var dbLaptops = this.cacheService.Get<ICollection<Laptop>>("allLaptops", () =>
+        //    //{
+        //    //    return laptopsService.GetAll();
+        //    //}, 60);
+        //    var dbLaptops = laptopsService.GetAll().ToList();
+        //    var laptops = Mapper.Map<ICollection<Laptop>,
+        //        ICollection<LaptopViewModel>>(dbLaptops);
 
-            //var laptop = this.laptops.GetAll();
-            //var viewModel = this.Mapper.Map<LaptopViewModel>(laptop);
-            return this.View(laptops);
-        }
+        //    //var laptop = this.laptops.GetAll();
+        //    //var viewModel = this.Mapper.Map<LaptopViewModel>(laptop);
+        //    return this.View(laptops);
+        //}
     }
 }
