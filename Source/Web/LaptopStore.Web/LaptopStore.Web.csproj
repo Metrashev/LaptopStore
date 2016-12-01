@@ -219,6 +219,7 @@
     <Compile Include="Areas\Administration\Controllers\LaptopsController.cs" />
     <Compile Include="Areas\Administration\Controllers\ManufacturersController.cs" />
     <Compile Include="Areas\Administration\ViewModels\LaptopViewModel.cs" />
+    <Compile Include="Areas\Administration\ViewModels\ManufacturerViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

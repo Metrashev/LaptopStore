@@ -1,5 +1,6 @@
 ﻿namespace LaptopStore.Services.Data
 {
+    using System;
     using System.Linq;
 
     using LaptopStore.Data.Common;
@@ -7,30 +8,44 @@
 
     public class ManufacturersService : IManufacturersService
     {
-        private readonly IDbRepository<Manufacturer> manufacturers;
+        private readonly IDbRepository<Manufacturer> manufacturer;
 
-        public ManufacturersService(IDbRepository<Manufacturer> manufacturers)
+        public ManufacturersService(IDbRepository<Manufacturer> manufacturer)
         {
-            this.manufacturers = manufacturers;
+            this.manufacturer = manufacturer;
         }
 
-        public Manufacturer EnsureCategory(string name)
+        public void Add(Manufacturer entity)
         {
-            var manufacturer = this.manufacturers.All().FirstOrDefault(x => x.Name == name);
-            if (manufacturer != null)
-            {
-                return manufacturer;
-            }
+            this.manufacturer.Add(entity);
+            this.manufacturer.SaveChanges();
+        }
 
-            manufacturer = new Manufacturer { Name = name };
-            this.manufacturers.Add(manufacturer);
-            this.manufacturers.SaveChanges();
-            return manufacturer;
+        public void Delete(object id)
+        {
+            this.manufacturer.Delete(id);
+            this.manufacturer.SaveChanges();
+        }
+
+        public Manufacturer Find(object id)
+        {
+            return this.manufacturer.Find(id);
         }
 
         public IQueryable<Manufacturer> GetAll()
         {
-            return this.manufacturers.All().OrderBy(x => x.Name);
+            return this.manufacturer.All();
+        }
+
+        public void SaveChanges()
+        {
+            this.manufacturer.SaveChanges();
+        }
+
+        public void Update(Manufacturer entity)
+        {
+            this.manufacturer.Update(entity);
+            this.manufacturer.SaveChanges();
         }
     }
 }

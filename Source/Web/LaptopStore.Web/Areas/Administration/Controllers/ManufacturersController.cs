@@ -8,17 +8,33 @@ using System.Web;
 using System.Web.Mvc;
 using LaptopStore.Data;
 using LaptopStore.Data.Models;
+using LaptopStore.Web.Controllers;
+using LaptopStore.Web.Areas.Administration.ViewModels;
+using LaptopStore.Services.Data;
+using AutoMapper;
 
 namespace LaptopStore.Web.Areas.Administration.Controllers
 {
-    public class ManufacturersController : Controller
+    public class ManufacturersController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IManufacturersService manufacturersService;
+
+        private ILaptopsService laptopsService;
+
+        public ManufacturersController(
+            ILaptopsService laptopService,
+            IManufacturersService manufacturersService)
+        {
+            this.laptopsService = laptopService;
+            this.manufacturersService = manufacturersService;
+        }
+
+        //private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Administration/Manufacturers
         public ActionResult Index()
         {
-            return View(db.Manufacturers.ToList());
+            return View(manufacturersService.GetAll().ToList());
         }
 
         // GET: Administration/Manufacturers/Details/5
@@ -28,7 +44,7 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            Manufacturer manufacturer = this.manufacturersService.Find(id);
             if (manufacturer == null)
             {
                 return HttpNotFound();
@@ -47,12 +63,12 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] Manufacturer manufacturer)
+        public ActionResult Create(ManufacturerViewModel manufacturer)
         {
             if (ModelState.IsValid)
             {
-                db.Manufacturers.Add(manufacturer);
-                db.SaveChanges();
+                var dbmanufacturer = Mapper.Map<Manufacturer>(manufacturer);
+                this.manufacturersService.Add(dbmanufacturer);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +82,7 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            Manufacturer manufacturer = this.manufacturersService.Find(id);
             if (manufacturer == null)
             {
                 return HttpNotFound();
@@ -79,12 +95,13 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] Manufacturer manufacturer)
+        public ActionResult Edit(ManufacturerViewModel manufacturer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(manufacturer).State = EntityState.Modified;
-                db.SaveChanges();
+                var dbManufacturer = Mapper.Map<Manufacturer>(manufacturer);
+                dbManufacturer.CreatedOn = DateTime.Now;
+                this.manufacturersService.Update(dbManufacturer);
                 return RedirectToAction("Index");
             }
             return View(manufacturer);
@@ -97,7 +114,7 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            Manufacturer manufacturer = this.manufacturersService.Find(id);
             if (manufacturer == null)
             {
                 return HttpNotFound();
@@ -110,19 +127,18 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Manufacturer manufacturer = db.Manufacturers.Find(id);
-            db.Manufacturers.Remove(manufacturer);
-            db.SaveChanges();
+            Manufacturer manufacturer = this.manufacturersService.Find(id);
+            this.manufacturersService.Delete(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

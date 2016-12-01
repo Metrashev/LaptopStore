@@ -35,7 +35,6 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             var laptops = Mapper.Map<List<Laptop>, List<LaptopViewModel>>(laptopsService.GetAll().ToList());
             return View(laptops);
         }
-        
 
         // GET: Administration/Laptops/Create
         public ActionResult Create()

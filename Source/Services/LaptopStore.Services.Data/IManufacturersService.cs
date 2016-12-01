@@ -8,6 +8,14 @@
     {
         IQueryable<Manufacturer> GetAll();
 
-        Manufacturer EnsureCategory(string name);
+        Manufacturer Find(object id);
+
+        void Update(Manufacturer entity);
+
+        void Add(Manufacturer entity);
+
+        void Delete(object id);
+
+        void SaveChanges();
     }
 }
