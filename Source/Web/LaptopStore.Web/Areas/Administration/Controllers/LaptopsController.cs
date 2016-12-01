@@ -35,8 +35,7 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             var laptops = Mapper.Map<List<Laptop>, List<LaptopViewModel>>(laptopsService.GetAll().ToList());
             return View(laptops);
         }
-
-        //private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: Administration/Laptops/Create
         public ActionResult Create()
@@ -95,13 +94,10 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
 
             LaptopViewModel laptopViewModel = Mapper.Map<LaptopViewModel>(laptop);
             laptopViewModel.ManufacturersList = new SelectList(manufacturersService.GetAll(), "Id", "Name");
-
             return this.View(laptopViewModel);
         }
 
         // POST: Administration/Laptops/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(LaptopViewModel laptop)
@@ -109,11 +105,13 @@ namespace LaptopStore.Web.Areas.Administration.Controllers
             if (ModelState.IsValid)
             {
                 var dbLaptop = Mapper.Map<Laptop>(laptop);
+                dbLaptop.CreatedOn = DateTime.Now;
                 this.laptopsService.Update(dbLaptop);
                 return RedirectToAction("Index");
             }
-            laptop.ManufacturersList = new SelectList(this.manufacturersService.GetAll(), "Id", "Name", laptop.ManufacturersList);
-            return this.View(laptop);
+            //ViewBag.ManufacturersList = new SelectList(this.manufacturersService.GetAll(), "Id", "Name", laptop.ManufacturersList);
+            laptop.ManufacturersList = new SelectList(this.manufacturersService.GetAll(), "Id", "Name", laptop.ManufacturerId);
+            return View(laptop);
         }
 
         // GET: Administration/Laptops/Delete/5
