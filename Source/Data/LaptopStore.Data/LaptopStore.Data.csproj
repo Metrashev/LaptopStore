@@ -68,6 +68,14 @@
     <Compile Include="Migrations\201602100922285_JokesAndJokesCategories.Designer.cs">
       <DependentUpon>201602100922285_JokesAndJokesCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021008420_AddVoting.cs" />
+    <Compile Include="Migrations\201612021008420_AddVoting.Designer.cs">
+      <DependentUpon>201612021008420_AddVoting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021019165_AddVoting1.cs" />
+    <Compile Include="Migrations\201612021019165_AddVoting1.Designer.cs">
+      <DependentUpon>201612021019165_AddVoting1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +99,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602100922285_JokesAndJokesCategories.resx">
       <DependentUpon>201602100922285_JokesAndJokesCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021008420_AddVoting.resx">
+      <DependentUpon>201612021008420_AddVoting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021019165_AddVoting1.resx">
+      <DependentUpon>201612021019165_AddVoting1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

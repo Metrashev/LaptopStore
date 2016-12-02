@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Laptop.cs" />
+    <Compile Include="Vote.cs" />
     <Compile Include="Manufacturer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

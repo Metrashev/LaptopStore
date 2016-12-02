@@ -12,12 +12,12 @@
     using Data.Models;
     using System;
 
-    public class HomeController : BaseController
+    public class LaptopController : BaseController
     {
         private readonly ILaptopsService laptopsService;
         private readonly IManufacturersService manufacturersService;
 
-        public HomeController(
+        public LaptopController(
             ILaptopsService laptopsService,
             IManufacturersService manufacturers)
         {

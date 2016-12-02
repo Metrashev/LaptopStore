@@ -61,3 +61,31 @@ textarea {
 .text-bold {
     font-weight: bold;
 }
+
+.image-size {
+    min-width: 100%;
+    height: 180px;
+}
+
+table.tablesorter { 
+  background-color: #4D4D4D; 
+  font-size: 12px; 
+  width: 650px; 
+} 
+table.tablesorter th { 
+  background: #6E6E6E url("img/table-sorter-bg.png") no-repeat 0 -3px; 
+  cursor: pointer; 
+  height: auto; 
+  padding: 5px 0 5px 30px; 
+  text-align: left; 
+} 
+table.tablesorter td { 
+  color: #FFFFFF; 
+  padding: 5px; 
+} 
+table.tablesorter .headerSortUp { 
+  background-image: url("img/table-sorter-asc.png"); 
+} 
+table.tablesorter .headerSortDown { 
+  background-image: url("img/table-sorter-desc.png"); 
+}

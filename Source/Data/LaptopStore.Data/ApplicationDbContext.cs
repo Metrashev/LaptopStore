@@ -21,6 +21,8 @@
 
         public IDbSet<Manufacturer> Manufacturers { get; set; }
 
+        public IDbSet<Vote> Votes { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

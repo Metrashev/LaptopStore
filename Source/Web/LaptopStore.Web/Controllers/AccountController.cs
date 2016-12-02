@@ -181,7 +181,7 @@
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    return this.RedirectToAction("Index", "Home");
+                    return this.RedirectToAction("Laptop", "Home");
                 }
 
                 this.AddErrors(result);
@@ -418,7 +418,7 @@
         public ActionResult LogOff()
         {
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Laptop");
         }
 
         // GET: /Account/ExternalLoginFailure
@@ -463,7 +463,7 @@
                 return this.Redirect(returnUrl);
             }
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Laptop");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
