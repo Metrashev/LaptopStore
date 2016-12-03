@@ -27,15 +27,6 @@
 
         public string Description { get; set; }
 
-        //public string Url
-        //{
-        //    get
-        //    {
-        //        IIdentifierProvider identifier = new IdentifierProvider();
-        //        return $"/Laptop/{identifier.EncodeId(this.Id)}";
-        //    }
-        //}
-
         public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<Laptop, LaptopViewModel>()

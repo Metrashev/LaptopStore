@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201612021019165_AddVoting1.Designer.cs">
       <DependentUpon>201612021019165_AddVoting1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612030828206_Voting.cs" />
+    <Compile Include="Migrations\201612030828206_Voting.Designer.cs">
+      <DependentUpon>201612030828206_Voting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021019165_AddVoting1.resx">
       <DependentUpon>201612021019165_AddVoting1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612030828206_Voting.resx">
+      <DependentUpon>201612030828206_Voting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

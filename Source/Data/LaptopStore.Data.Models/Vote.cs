@@ -9,15 +9,17 @@ namespace LaptopStore.Data.Models
 {
     public class Vote
     {
-        [Key]
         public int Id { get; set; }
 
-        public string VotedById { get; set; }
+        [Required]
+        public string AuthorId { get; set; }
 
-        public virtual ApplicationUser VotedBy { get; set; }
+        public virtual ApplicationUser Author { get; set; }
 
         public int LaptopId { get; set; }
 
         public virtual Laptop Laptop { get; set; }
+
+        public VoteType Type { get; set; }
     }
 }

@@ -89,3 +89,7 @@ table.tablesorter .headerSortUp {
 table.tablesorter .headerSortDown { 
   background-image: url("img/table-sorter-desc.png"); 
 }
+
+div[data-action="up"], div[data-action="down"] {
+    cursor: pointer;
+}

@@ -11,6 +11,7 @@
     using System.Collections.Generic;
     using Data.Models;
     using System;
+    using Microsoft.AspNet.Identity;
 
     public class LaptopController : BaseController
     {

@@ -7,5 +7,8 @@
         public IEnumerable<LaptopViewModel> Laptops { get; set; }
 
         public IEnumerable<ManufacturerViewModel> Manufacturers { get; set; }
+
+        public IEnumerable<LaptopDetailsViewModel> LaptopDetails { get; set; }
+
     }
 }
