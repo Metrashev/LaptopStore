@@ -10,5 +10,9 @@ namespace LaptopStore.Services.Data
     public interface IVoteService
     {
         IQueryable<Vote> GetAll();
+
+        void Add(Vote entity);
+
+        void SaveChanges();
     }
 }

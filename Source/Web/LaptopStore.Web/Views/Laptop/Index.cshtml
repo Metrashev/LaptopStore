@@ -9,12 +9,23 @@
         <div class="col-lg-3">
             <div class="panel-group">
                 <div class="panel panel-default">
-                    <img src="@item.ImageUrl" alt="@item.Manufacturer @item.Model" />
-                    <div class="text-center">@item.Manufacturer @item.Model</div>
+                    <img src="@item.ImageUrl" alt="@item.Manufacturer.Name @item.Model" />
+                    <div class="text-center">@item.Manufacturer.Name @item.Model</div>
                         <div class="text-center">@item.MonitorSize"</div>
                         <div class="text-center">@item.HardDiskSize GB</div>
                         <div class="text-center">@item.RamMemorySize RAM</div>
                         <div class="text-center">@item.Weight kg</div> <br/>
+                        <div class="well text-center">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            <div class="row" data-id="@item.Id" data-action="up" id="up"><span class="glyphicon glyphicon glyphicon-thumbs-up"></span></div>
+                            }
+                            <div class="row" data-id="@item.Id" data-action="votesCount">@item.VotesCount</div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="row" data-id="@item.Id" data-action="down"><span class="glyphicon glyphicon-thumbs-down"></span></div>
+                            }
+                        </div>
                         <div class="text-center">
                             <a href="@Url.Action("Details", "Laptop", new { item.Id })" class="text-center">More Info</a>
                         </div><br />
@@ -27,6 +38,34 @@
             </div>
         </div>
     }
-</div>
 
+</div>
+@section scripts{
+    <script>
+        $("div[data-action='up'").click(function () {
+            var id = $(this).attr("data-id");
+            console.log("test");
+            voteClick(id, 1);
+        });
+        $("div[data-action='down'").click(function () {
+            var id = $(this).attr("data-id");
+            voteClick(id, -1);
+        });
+
+        function voteClick(laptopId, voteType) {
+            console.log(laptopId);
+            console.log(voteType);
+            var dt = { LaptopId: laptopId, VoteType: voteType };
+            $.ajax({
+                type: "POST",
+                url: '/Vote/Voting',
+                data: dt,
+                success: function (data) {
+                    var newVotesCount = data.Count;
+                    $("div[data-action='votesCount'][data-id='" + laptopId + "']").html(newVotesCount)
+                }
+            });
+        }
+    </script>
+}
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page } ))

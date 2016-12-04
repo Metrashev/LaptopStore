@@ -68,6 +68,10 @@
       <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
       <Name>LaptopStore.Data.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Data\LaptopStore.Data\LaptopStore.Data.csproj">
+      <Project>{7C950CDC-9587-4B65-A204-988EFED17948}</Project>
+      <Name>LaptopStore.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LaptopStore.Services.Web\LaptopStore.Services.Web.csproj">
       <Project>{deab17a2-58c1-448c-8a66-d49c3af7fc6c}</Project>
       <Name>LaptopStore.Services.Web</Name>

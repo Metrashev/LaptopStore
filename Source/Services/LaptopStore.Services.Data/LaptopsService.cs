@@ -10,12 +10,10 @@
     public class LaptopsService : ILaptopsService
     {
         private readonly IDbRepository<Laptop> laptops;
-        private readonly IIdentifierProvider identifierProvider;
 
-        public LaptopsService(IDbRepository<Laptop> laptops, IIdentifierProvider identifierProvider)
+        public LaptopsService(IDbRepository<Laptop> laptops)
         {
             this.laptops = laptops;
-            this.identifierProvider = identifierProvider;
         }
 
         public IQueryable<Laptop> GetAll()

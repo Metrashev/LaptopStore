@@ -15,9 +15,7 @@ namespace LaptopStore.Web.ViewModels.Home
 
         public string Model { get; set; }
 
-        public string ManufacturerName { get; set; }
-
-        public LaptopViewModel Manufacturer { get; set; }
+        public string Manufacturer { get; set; }
 
         public double MonitorSize { get; set; }
 

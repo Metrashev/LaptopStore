@@ -4,6 +4,8 @@
     using LaptopStore.Data.Models;
     using LaptopStore.Services.Web;
     using LaptopStore.Web.Infrastructure.Mapping;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class LaptopViewModel : IMapFrom<Laptop>, IHaveCustomMappings
     {
@@ -11,7 +13,7 @@
 
         public string Model { get; set; }
 
-        public string Manufacturer { get; set; }
+        public ManufacturerViewModel Manufacturer { get; set; }
 
         public double MonitorSize { get; set; }
 
@@ -27,10 +29,13 @@
 
         public string Description { get; set; }
 
+        public int VotesCount { get; set; }
+
         public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<Laptop, LaptopViewModel>()
-                .ForMember(x => x.Manufacturer, opt => opt.MapFrom(x => x.Manufacturer.Name));
+                .ForMember(x => x.VotesCount,
+                opt => opt.MapFrom(x => x.Votes.Any() ? x.Votes.Sum(v => (int)v.Type) : 0));
         }
     }
 }

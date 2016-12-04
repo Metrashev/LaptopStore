@@ -4,6 +4,7 @@ using LaptopStore.Services.Data;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,56 +13,64 @@ namespace LaptopStore.Web.Controllers
 {
     public class VoteController : BaseController
     {
-        IDbRepository<Vote> votes;
-
-        private readonly IVoteService voteService;
-
-        public VoteController(IDbRepository<Vote> votes, IVoteService voteService)
+        public class LaptopVoting
         {
-            this.votes = votes;
+            public int LaptopId { get; set; }
+
+            public int VoteType { get; set; }
+        }
+
+        private IVoteService voteService;
+
+        public VoteController(IVoteService voteService)
+        {
             this.voteService = voteService;
         }
 
-        public ActionResult Vote(int laptopId, int voteType)
+        [HttpPost]
+        public ActionResult Voting(LaptopVoting laptopModel)
         {
-            if (voteType > 1)
+            if (laptopModel.VoteType > 1)
             {
-                voteType = 1;
+                laptopModel.VoteType = 1;
             }
-            if (voteType < -1)
+            if (laptopModel.VoteType < -1)
             {
-                voteType = -1;
+                laptopModel.VoteType = -1;
             }
 
             var userId = this.User.Identity.GetUserId();
 
-            var vote = this.voteService.GetAll().FirstOrDefault(x => x.AuthorId == userId && x.LaptopId == laptopId);
+            var votes = this.voteService;
+            
+            var vote = votes
+                .GetAll().FirstOrDefault(x => x.LaptopId == laptopModel.LaptopId);
 
             if (vote == null)
             {
                 vote = new Vote
                 {
                     AuthorId = userId,
-                    LaptopId = laptopId,
-                    Type = (VoteType)voteType
+                    LaptopId = laptopModel.LaptopId,
+                    Type = (VoteType)laptopModel.VoteType
                 };
-                this.votes.Add(vote);
+                this.voteService.Add(vote);
             }
             else
             {
-                if (vote.Type != (VoteType)voteType)
+                if (vote.Type != (VoteType)laptopModel.VoteType)
                 {
                     vote.Type = VoteType.Neutral;
                 }
                 else if (vote.Type == VoteType.Neutral)
                 {
-                    vote.Type = (VoteType)voteType;
+                    vote.Type = (VoteType)laptopModel.VoteType;
                 }
             }
 
-            this.votes.SaveChanges();
-            var postVotes = this.votes.All()
-                .Where(x => x.LaptopId == laptopId)
+            this.voteService.SaveChanges();
+            var postVotes = this.voteService.GetAll()
+                .Where(x => x.LaptopId == laptopModel.LaptopId)
                 .Sum(x => (int)x.Type);
 
             return this.Json(new { Count = postVotes });

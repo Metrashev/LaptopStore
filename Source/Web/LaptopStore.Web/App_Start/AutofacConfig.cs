@@ -14,6 +14,7 @@
 
     using Services.Data;
     using Services.Web;
+    using Data.Models;
 
     public static class AutofacConfig
     {
@@ -47,22 +48,30 @@
 
         private static void RegisterServices(ContainerBuilder builder)
         {
+            builder.RegisterGeneric(typeof(DbRepository<>))
+                    .As(typeof(IDbRepository<>))
+                    .InstancePerRequest();
+
             builder.Register(x => new ApplicationDbContext())
                 .As<DbContext>()
                 .InstancePerRequest();
+
             builder.Register(x => new HttpCacheService())
                 .As<ICacheService>()
                 .InstancePerRequest();
+
             builder.Register(x => new IdentifierProvider())
                 .As<IIdentifierProvider>()
                 .InstancePerRequest();
 
-            var servicesAssembly = Assembly.GetAssembly(typeof(ILaptopsService));
-            builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ILaptopsService))).AsImplementedInterfaces();
 
-            builder.RegisterGeneric(typeof(DbRepository<>))
-                .As(typeof(IDbRepository<>))
-                .InstancePerRequest();
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IManufacturersService))).AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IVoteService))).AsImplementedInterfaces();
+
+            //var servicesAssembly = Assembly.GetAssembly(typeof(ILaptopsService));
+            //builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AssignableTo<BaseController>().PropertiesAutowired();

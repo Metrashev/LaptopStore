@@ -27,6 +27,7 @@
         }
 
         [Authorize]
+
         public ActionResult Index(int? page)
         {
             //var dblaptops =

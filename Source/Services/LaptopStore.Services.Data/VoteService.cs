@@ -10,9 +10,9 @@ namespace LaptopStore.Services.Data
 {
     public class VoteService : IVoteService
     {
-        private readonly IDbRepository<Vote> votes;
+        private IDbRepository<Vote> votes;
 
-        public VoteService(IDbRepository<Laptop> laptops)
+        public VoteService(IDbRepository<Vote> votes)
         {
             this.votes = votes;
         }
@@ -20,6 +20,17 @@ namespace LaptopStore.Services.Data
         public IQueryable<Vote> GetAll()
         {
             return this.votes.All();
+        }
+
+        public void Add(Vote entity)
+        {
+            this.votes.Add(entity);
+            this.votes.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
+            this.votes.SaveChanges();
         }
     }
 }
