@@ -25,22 +25,20 @@
             this.laptopsService = laptopsService;
             this.manufacturersService = manufacturersService;
         }
-
-        [Authorize]
-
+        
         public ActionResult Index(int? page)
         {
-            //var dblaptops =
-            //    this.Cache.Get(
-            //        "LaptopsCaching",
-            //        () => this.laptopsService
-            //        .GetAll().ToList
-            //        60).ToList();
+            var dblaptops =
+                this.Cache.Get(
+                    "LaptopsCaching",
+                    () => this.laptopsService
+                    .GetAll().ToList(),
+                    60).ToList();
 
-            var dblaptops = laptopsService.GetAll().OrderBy(x => x.Id);
+            //var dblaptops = laptopsService.GetAll().OrderBy(x => x.Id);
 
             var laptops = Mapper.Map<ICollection<Laptop>,
-                ICollection<LaptopViewModel>>(dblaptops.ToList());
+                ICollection<LaptopViewModel>>(dblaptops);
 
             int pageSize = 8;
             int pageNumber = (page ?? 1);

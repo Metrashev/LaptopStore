@@ -15,17 +15,16 @@
                         <div class="text-center">@item.HardDiskSize GB</div>
                         <div class="text-center">@item.RamMemorySize RAM</div>
                         <div class="text-center">@item.Weight kg</div> <br/>
-                        <div class="well text-center">
+                        
                             @if (User.Identity.IsAuthenticated)
                             {
-                            <div class="row" data-id="@item.Id" data-action="up" id="up"><span class="glyphicon glyphicon glyphicon-thumbs-up"></span></div>
+                                <div class="well text-center">
+                                    <div class="row" data-id="@item.Id" data-action="up" id="up"><span class="glyphicon glyphicon glyphicon-thumbs-up"></span></div>
+                                    <div class="row" data-id="@item.Id" data-action="votesCount">@item.VotesCount</div>
+                                    <div class="row" data-id="@item.Id" data-action="down"><span class="glyphicon glyphicon-thumbs-down"></span></div>
+                                </div>
                             }
-                            <div class="row" data-id="@item.Id" data-action="votesCount">@item.VotesCount</div>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <div class="row" data-id="@item.Id" data-action="down"><span class="glyphicon glyphicon-thumbs-down"></span></div>
-                            }
-                        </div>
+                               
                         <div class="text-center">
                             <a href="@Url.Action("Details", "Laptop", new { item.Id })" class="text-center">More Info</a>
                         </div><br />
