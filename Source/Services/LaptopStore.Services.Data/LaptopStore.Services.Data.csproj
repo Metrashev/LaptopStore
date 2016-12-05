@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartService.cs" />
+    <Compile Include="ICartService.cs" />
     <Compile Include="IVoteService.cs" />
     <Compile Include="ManufacturersService.cs" />
     <Compile Include="IManufacturersService.cs" />

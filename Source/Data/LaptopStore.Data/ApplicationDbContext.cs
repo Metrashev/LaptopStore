@@ -23,6 +23,8 @@
 
         public IDbSet<Vote> Votes { get; set; }
 
+        public IDbSet<Cart> Carts { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

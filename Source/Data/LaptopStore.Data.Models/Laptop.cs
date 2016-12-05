@@ -8,8 +8,11 @@
     {
         private ICollection<Vote> votes;
 
+        private ICollection<Cart> carts;
+
         public Laptop()
         {
+            this.carts = new HashSet<Cart>();
             this.votes = new HashSet<Vote>();
         }
 
@@ -43,6 +46,12 @@
         {
             get { return this.votes; }
             set { this.votes = value; }
+        }
+
+        public virtual ICollection<Cart> Carts
+        {
+            get { return this.carts; }
+            set { this.carts = value; }
         }
     }
 }

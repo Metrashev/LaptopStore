@@ -80,6 +80,18 @@
     <Compile Include="Migrations\201612030828206_Voting.Designer.cs">
       <DependentUpon>201612030828206_Voting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612050937446_AddCart.cs" />
+    <Compile Include="Migrations\201612050937446_AddCart.Designer.cs">
+      <DependentUpon>201612050937446_AddCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612050938337_CartAdded.cs" />
+    <Compile Include="Migrations\201612050938337_CartAdded.Designer.cs">
+      <DependentUpon>201612050938337_CartAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612050944087_RemoveUnusedProps.cs" />
+    <Compile Include="Migrations\201612050944087_RemoveUnusedProps.Designer.cs">
+      <DependentUpon>201612050944087_RemoveUnusedProps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +124,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612030828206_Voting.resx">
       <DependentUpon>201612030828206_Voting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612050937446_AddCart.resx">
+      <DependentUpon>201612050937446_AddCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612050938337_CartAdded.resx">
+      <DependentUpon>201612050938337_CartAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612050944087_RemoveUnusedProps.resx">
+      <DependentUpon>201612050944087_RemoveUnusedProps.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

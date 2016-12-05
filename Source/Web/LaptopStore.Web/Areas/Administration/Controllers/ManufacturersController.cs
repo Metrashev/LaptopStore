@@ -15,6 +15,7 @@ using AutoMapper;
 
 namespace LaptopStore.Web.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ManufacturersController : BaseController
     {
         private IManufacturersService manufacturersService;

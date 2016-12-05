@@ -1,0 +1,10 @@
+﻿
+@if (User.IsInRole("Administrator"))
+{
+    <li>
+        @Html.ActionLink("Add Configuration", "Index", "Laptops", new { Area = "Administration" }, new { })
+    </li>
+    <li>
+        @Html.ActionLink("Add Manufacturer", "Index", "Manufacturers", new { Area = "Administration" }, new { })
+    </li>
+}

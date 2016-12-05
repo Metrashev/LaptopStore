@@ -14,6 +14,7 @@ using LaptopStore.Services.Data;
 
 namespace LaptopStore.Web.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class LaptopsController : BaseController
     {
 
