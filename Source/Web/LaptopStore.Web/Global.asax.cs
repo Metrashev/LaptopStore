@@ -11,6 +11,8 @@
     using Data.Migrations;
 
     using Infrastructure.Mapping;
+    using Data.Models;
+    using Controllers;
 
 #pragma warning disable SA1649 // File name must match first type name
     public class MvcApplication : HttpApplication
@@ -27,6 +29,7 @@
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
 
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute(Assembly.GetExecutingAssembly());

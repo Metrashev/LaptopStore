@@ -1,37 +1,25 @@
-﻿using System;
+﻿using LaptopStore.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace LaptopStore.Services.Data
 {
     public interface ICartService
     {
-        //AddItem
+        //IQueryable<Cart> GetAll();
 
-        //RemoveLine
+        //Cart Find(object id);
 
-        //ComputeTotalValue
+        //void Add(Cart entity);
 
-        //Clear
+        //void Delete(object id);
 
-        //IEnumerable<Product> Products { get; }
+        //void SaveChanges();
 
-        //void SaveProduct(Product product);
-
-        //Product DeleteProduct(int productId);
-
-        //void GetCart();
-
-        //void AddToCart();
-
-        // int RemoveFromCart();
-
-        //EmptyCart();
-
-        //GetCount();
-
-        //GetTotal();
+        //string GetCartId(HttpContextBase context);
     }
 }

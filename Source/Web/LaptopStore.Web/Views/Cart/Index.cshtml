@@ -1,1 +1,74 @@
-﻿<h2>Shopping Cart Here</h2>
+﻿@model ShoppingCartViewModel
+<h3>
+    Cart
+</h3>
+<div id="update-message">
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Laptop
+        </th>
+        <th>
+            Price (each)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.Id">
+            <td>
+                @item.Laptop.Manufacturer.Name @item.Laptop.Model
+            </td>
+            <td>
+                @item.Laptop.Price $
+            </td>
+            <td id="item-count-@item.Id">
+                @item.Quantity
+            </td>
+            <td>
+                <a href="#" class="RemoveLink" data-id="@item.Id">Remove from cart</a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="text-bold">
+            Total
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total">
+            @Model.CartTotal $
+        </td>
+    </tr>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(function () {
+            $(".RemoveLink").click(function () {
+                var recordToDelete = $(this).attr("data-id");
+                if (recordToDelete != '') {
+                $.post("/Cart/RemoveFromCart", { "id": recordToDelete },
+                    function (data) {
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+
+                        $('#cart-total').text(data.CartTotal + " $");
+                        $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+                }
+            });
+
+        });
+    </script>
+}

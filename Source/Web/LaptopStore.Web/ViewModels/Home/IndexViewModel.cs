@@ -10,5 +10,7 @@
 
         public IEnumerable<LaptopDetailsViewModel> LaptopDetails { get; set; }
 
+        public IEnumerable<ShoppingCartViewModel> Carts { get; set; }
+
     }
 }

@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Laptop", "Index", "Laptop", new { area = string.Empty }, null)</li>
                     @Html.Partial("_AdminPartial")
-                    <li>@{Html.RenderAction("CartCount", "Cart");}</li>
+                    <li>@{Html.RenderAction("CartSummary", "Cart");}</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

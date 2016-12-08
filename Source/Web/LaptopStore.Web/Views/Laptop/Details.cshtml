@@ -33,6 +33,9 @@
             <tr>
                 <th>Buy </th>
                 <td>
+                        @*@Html.ActionLink("Add to cart", "AddToCart",
+                            "Cart", new { id = Model.Id }, new { @class = "btn btn-primary" })*@
+                    
                     @Html.Partial("_AddToCart")
                 </td>
             </tr>

@@ -12,17 +12,12 @@ namespace LaptopStore.Data.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        public string AuthorId { get; set; }
-
-        public virtual ApplicationUser Author { get; set; }
+        public string CartId { get; set; }
 
         public int LaptopId { get; set; }
 
         public virtual Laptop Laptop { get; set; }
 
         public int Quantity { get; set; }
-
-        public decimal TotalPrice { get; set; }
     }
 }

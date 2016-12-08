@@ -20,12 +20,12 @@
 
         public LaptopController(
             ILaptopsService laptopsService,
-            IManufacturersService manufacturers)
+            IManufacturersService manufacturersService)
         {
             this.laptopsService = laptopsService;
             this.manufacturersService = manufacturersService;
         }
-        
+
         public ActionResult Index(int? page)
         {
             //var dblaptops =
