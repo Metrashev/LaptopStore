@@ -28,14 +28,12 @@
 
         public ActionResult Index(int? page)
         {
-            //var dblaptops =
-            //    this.Cache.Get(
-            //        "LaptopsCaching",
-            //        () => this.laptopsService
-            //        .GetAll().ToList(),
-            //        60).ToList();
-
-            var dblaptops = laptopsService.GetAll().OrderBy(x => x.Id).ToList();
+            var dblaptops =
+                this.Cache.Get(
+                    "LaptopsCaching",
+                    () => this.laptopsService
+                    .GetAll().ToList(),
+                    60).ToList();
 
             var laptops = Mapper.Map<ICollection<Laptop>,
                 ICollection<LaptopViewModel>>(dblaptops);
