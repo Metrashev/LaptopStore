@@ -2,51 +2,12 @@
 <h3>
     Cart
 </h3>
-<div id="update-message">
-</div>
-<table class="table">
-    <tr>
-        <th>
-            Laptop
-        </th>
-        <th>
-            Price (each)
-        </th>
-        <th>
-            Quantity
-        </th>
-        <th>
-            Action
-        </th>
-    </tr>
-    @foreach (var item in Model.CartItems)
-    {
-        <tr id="row-@item.Id">
-            <td>
-                @item.Laptop.Manufacturer.Name @item.Laptop.Model
-            </td>
-            <td>
-                @item.Laptop.Price $
-            </td>
-            <td id="item-count-@item.Id">
-                @item.Quantity
-            </td>
-            <td>
-                <a href="#" class="RemoveLink" data-id="@item.Id">Remove from cart</a>
-            </td>
-        </tr>
-    }
-    <tr>
-        <td class="text-bold">
-            Total
-        </td>
-        <td></td>
-        <td></td>
-        <td id="cart-total">
-            @Model.CartTotal $
-        </td>
-    </tr>
-</table>
+
+@Html.Partial("_CartTable")
+
+@Html.Partial("_BackToShop")
+
+@Html.Partial("_Checkout")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")

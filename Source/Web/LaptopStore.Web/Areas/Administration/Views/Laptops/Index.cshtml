@@ -1,24 +1,19 @@
 ﻿@model IEnumerable<LaptopViewModel>
-
-@{
-    ViewBag.Title = "Index";
-}
-
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table"  id="table-sorter">
+
+<table class="table" id="table-sorter">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Manufacturer.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Model)</th>
-            <th>@Html.DisplayNameFor(model => model.MonitorSize)</th>
+            <th>@Html.DisplayNameFor(model => model.Manufacturer.Name) <span class="glyphicon glyphicon-sort"></span></th>
+            <th>@Html.DisplayNameFor(model => model.Model) <span class="glyphicon glyphicon-sort"></span></th>
+            <th>@Html.DisplayNameFor(model => model.MonitorSize) </th>
             <th>@Html.DisplayNameFor(model => model.HardDiskSize)</th>
             <th>@Html.DisplayNameFor(model => model.RamMemorySize)</th>
             <th>@Html.DisplayNameFor(model => model.ImageUrl)</th>
-            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Price) <span class="glyphicon glyphicon-sort"></span></th>
             <th>@Html.DisplayNameFor(model => model.Weight)</th>
             <th>@Html.DisplayNameFor(model => model.Description)</th>
         </tr>
@@ -64,6 +59,8 @@
         }
     </tbody>
 </table>
+
+@*@Html.Partial("_TableSorter")*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/tablesorter")

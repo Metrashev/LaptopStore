@@ -1,0 +1,29 @@
+﻿@model ShoppingCartViewModel
+
+<table class="table">
+    <tr>
+        <th>
+            Laptop
+        </th>
+        <th>
+            Price (each)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    @Html.Partial("_CartItemsRender")
+    <tr>
+        <td class="text-bold">
+            Total
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total">
+            @Model.CartTotal $
+        </td>
+    </tr>
+</table>

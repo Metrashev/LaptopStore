@@ -23,7 +23,18 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Laptop", "Index", "Laptop", new { area = string.Empty }, null)</li>
                     @Html.Partial("_AdminPartial")
+                    @*
                     <li>@{Html.RenderAction("CartSummary", "Cart");}</li>
+                        }
+                        else
+                        {
+                            <li>@{Html.RenderAction("CartSummary", "Cart");}</li>
+                        }*@
+                    @*<li>@Html.Partial("_CartSummary")</li>*@
+                    @if (!User.IsInRole("Administrator"))
+                    {
+                    <li>@Html.ActionLink("Cart Items", "Index", "Cart", new { area = string.Empty }, null)</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

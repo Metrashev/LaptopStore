@@ -1,0 +1,19 @@
+﻿@model ShoppingCartViewModel
+
+@foreach (var item in Model.CartItems)
+{
+    <tr id="row-@item.Id">
+        <td>
+            @item.Laptop.Manufacturer.Name @item.Laptop.Model
+        </td>
+        <td>
+            @item.Laptop.Price $
+        </td>
+        <td id="item-count-@item.Id">
+            @item.Quantity
+        </td>
+        <td>
+            <a href="#" class="RemoveLink btn btn-danger" data-id="@item.Id">Remove</a>
+        </td>
+    </tr>
+}

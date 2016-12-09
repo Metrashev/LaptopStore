@@ -40,10 +40,8 @@ namespace LaptopStore.Web.Controllers
             }
 
             var userId = this.User.Identity.GetUserId();
-
-            var votes = this.voteService;
             
-            var vote = votes
+            var vote = this.voteService
                 .GetAll().FirstOrDefault(x => x.LaptopId == laptopModel.LaptopId);
 
             if (vote == null)
@@ -69,11 +67,11 @@ namespace LaptopStore.Web.Controllers
             }
 
             this.voteService.SaveChanges();
-            var postVotes = this.voteService.GetAll()
+            var laptopVotes = this.voteService.GetAll()
                 .Where(x => x.LaptopId == laptopModel.LaptopId)
                 .Sum(x => (int)x.Type);
 
-            return this.Json(new { Count = postVotes });
+            return this.Json(new { Count = laptopVotes });
         }
     }
 }

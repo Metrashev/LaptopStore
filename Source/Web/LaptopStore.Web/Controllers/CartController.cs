@@ -57,9 +57,14 @@ namespace LaptopStore.Web.Controllers
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-            ViewData["CartCount"] = cart.GetCount();
-            return PartialView("CartSummary");
+            //var cart = ShoppingCart.GetCart(this.HttpContext);
+            //ViewData["CartCount"] = cart.GetCount();
+            return PartialView("_CartSummary");
+        }
+
+        public ActionResult Checkout()
+        {
+            return View();
         }
     }
 }
