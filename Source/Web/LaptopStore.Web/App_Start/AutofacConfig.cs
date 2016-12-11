@@ -60,19 +60,12 @@
                 .As<ICacheService>()
                 .InstancePerRequest();
 
-            builder.Register(x => new IdentifierProvider())
-                .As<IIdentifierProvider>()
-                .InstancePerRequest();
-
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ILaptopsService))).AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IManufacturersService))).AsImplementedInterfaces();
 
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IVoteService))).AsImplementedInterfaces();
-
-            //var servicesAssembly = Assembly.GetAssembly(typeof(ILaptopsService));
-            //builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();
-
+            
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AssignableTo<BaseController>().PropertiesAutowired();
         }

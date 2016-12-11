@@ -4,7 +4,7 @@
 {
     <tr id="row-@item.Id">
         <td>
-            @item.Laptop.Manufacturer.Name @item.Laptop.Model
+            @Html.ActionLink(item.Laptop.Manufacturer.Name + " " + item.Laptop.Model, "Details", "Laptop", new { id = item.LaptopId }, null)
         </td>
         <td>
             @item.Laptop.Price $
